@@ -193,9 +193,6 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         _doneButtonRightInset = 20.f;
         
         _doneButtonTopInset = 30.f;
-        if (@available(iOS 11, *)) {
-            _doneButtonTopInset = 30.f + self.view.safeAreaInsets.top;
-        }
         
         _doneButtonSize = CGSizeMake(55.f, 26.f);
 
@@ -1134,7 +1131,10 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     CGFloat screenWidth = screenBound.size.width;
 
     // if ([self isLandscape:orientation]) screenWidth = screenBound.size.height;
-
+    if (@available(iOS 11, *)) {
+        return CGRectMake(screenWidth - self.doneButtonRightInset - self.doneButtonSize.width, self.doneButtonTopInset + self.view.safeAreaInsets.top, self.doneButtonSize.width, self.doneButtonSize.height);
+        
+    }
     return CGRectMake(screenWidth - self.doneButtonRightInset - self.doneButtonSize.width, self.doneButtonTopInset, self.doneButtonSize.width, self.doneButtonSize.height);
 }
 
