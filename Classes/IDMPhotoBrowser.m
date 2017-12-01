@@ -191,7 +191,14 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         _isdraggingPhoto = NO;
         
         _doneButtonRightInset = 20.f;
+        
         _doneButtonTopInset = 30.f;
+        if (![[UIApplication sharedApplication] isStatusBarHidden]) {
+            if (@available(ios 11, *)) {
+                _doneButtonTopInset = 30.f + self.view.safeAreaInsets.top;
+            }
+        }
+        
         _doneButtonSize = CGSizeMake(55.f, 26.f);
 
 		if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
@@ -1112,11 +1119,16 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
 - (CGRect)frameForToolbarAtOrientation:(UIInterfaceOrientation)orientation {
     CGFloat height = 44;
+    
+    if (@available(iOS 11, *)) {
+        height = 44 + self.view.safeAreaInsets.bottom;
+    }
 
-    if ([self isLandscape:orientation])
+    BOOL isLandscape = [self isLandscape:orientation];
+    if (isLandscape)
         height = 32;
 
-    return CGRectMake(0, self.view.bounds.size.height - height, self.view.bounds.size.width, height);
+    return CGRectMake(0, self.view.bounds.size.height - height, self.view.bounds.size.width, isLandscape ? height : 44);
 }
 
 - (CGRect)frameForDoneButtonAtOrientation:(UIInterfaceOrientation)orientation {
