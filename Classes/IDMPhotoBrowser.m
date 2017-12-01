@@ -194,7 +194,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         
         _doneButtonTopInset = 30.f;
         if (![[UIApplication sharedApplication] isStatusBarHidden]) {
-            if (@available(ios 11, *)) {
+            if (@available(iOS 11, *)) {
                 _doneButtonTopInset = 30.f + self.view.safeAreaInsets.top;
             }
         }
