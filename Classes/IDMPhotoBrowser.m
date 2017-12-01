@@ -193,10 +193,8 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         _doneButtonRightInset = 20.f;
         
         _doneButtonTopInset = 30.f;
-        if (![[UIApplication sharedApplication] isStatusBarHidden]) {
-            if (@available(iOS 11, *)) {
-                _doneButtonTopInset = 30.f + self.view.safeAreaInsets.top;
-            }
+        if (@available(iOS 11, *)) {
+            _doneButtonTopInset = 30.f + self.view.safeAreaInsets.top;
         }
         
         _doneButtonSize = CGSizeMake(55.f, 26.f);
